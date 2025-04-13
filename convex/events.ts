@@ -1,5 +1,5 @@
 import { query, mutation } from "./_generated/server";
-import { ConvexError, v } from "convex/values";
+import { v } from "convex/values";
 import { DURATIONS, TICKET_STATUS, WAITING_LIST_STATUS } from "./constant";
 import { internal } from "./_generated/api";
 import { processQueue } from "./waitingList";
