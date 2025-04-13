@@ -62,8 +62,8 @@ const PurchaseTicket = ({ eventId }: { eventId: Id<"events"> }) => {
         router.push(sessionUrl);  
       }   
       
-    } catch (error) {
-      
+    } catch (error) { 
+      console.error("Error creating checkout session:", error);
     }finally{
       setIsLoading(false);
 
