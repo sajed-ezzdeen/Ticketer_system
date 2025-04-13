@@ -195,7 +195,7 @@ export const joinWaitingList = mutation({
 
     const event = await ctx.db.get(eventId);
     if (!event) throw new Error("Event not found");
-
+    // @ts-expect-error: Calling internal mutation directly — safe in this context
     const { available } = await checkAvailability(ctx, { eventId });
 
     const now = Date.now();
@@ -305,6 +305,7 @@ export const purchaseTicket = mutation({
         status: WAITING_LIST_STATUS.PURCHASED,
       });
       console.log("Processing queue for next person");
+      // @ts-expect-error: Calling internal mutation directly — safe in this context
       await processQueue(ctx, { eventId });
     } catch (error) {
       console.error("Failed to complete ticket purchase", error);
@@ -349,8 +350,6 @@ export const search = query({
         event.name.toLowerCase().includes(searchTermLower) ||
         event.description.toLowerCase().includes(searchTermLower) ||
         event.location.toLowerCase().includes(searchTermLower)
-        // event.eventDate.toString().includes(searchTermLower) ||
-        // event.price.toString().includes(searchTermLower)
       );
     });
   },

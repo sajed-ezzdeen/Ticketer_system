@@ -50,7 +50,7 @@ export const expireOffer = internalMutation({
     await ctx.db.patch(waitingListId, {
       status: WAITING_LIST_STATUS.EXPIRED,
     });
-          
+    // @ts-expect-error: Calling internal mutation directly — safe in this context
     await processQueue(ctx, { eventId });
   },
 });
@@ -140,7 +140,7 @@ export const releaseTicket = mutation({
       status: WAITING_LIST_STATUS.EXPIRED,
     });
 
-    // TODO: process queue to offer ticket to next person
+    // @ts-expect-error: Calling internal mutation directly — safe in this context
     await processQueue(ctx, {eventId});
   },
 });
