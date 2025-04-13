@@ -50,7 +50,7 @@ export const expireOffer = internalMutation({
     await ctx.db.patch(waitingListId, {
       status: WAITING_LIST_STATUS.EXPIRED,
     });
-
+          
     await processQueue(ctx, { eventId });
   },
 });
