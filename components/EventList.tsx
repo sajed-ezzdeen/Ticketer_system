@@ -2,13 +2,12 @@
 
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
+import EventCard from "./EventCard";
 import Spinner from "./Spinner";
 import { CalendarDays, Ticket } from "lucide-react";
-import EventCard from "./EventCard";
 
-const EventList = () => {
+export default function EventList() {
   const events = useQuery(api.events.getEvents);
-  console.log(events);
 
   if (!events) {
     return (
@@ -19,7 +18,7 @@ const EventList = () => {
   }
 
   const upcomingEvents = events
-    .filter((event) => event.eventDate > Date.now()) // filter out cancelled events
+    .filter((event) => event.eventDate > Date.now())
     .sort((a, b) => a.eventDate - b.eventDate);
 
   const pastEvents = events
@@ -33,7 +32,7 @@ const EventList = () => {
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Upcoming Events</h1>
           <p className="mt-2 text-gray-600">
-            Discover & book tickets for amazomg events
+            Discover & book tickets for amazing events
           </p>
         </div>
         <div className="bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-100">
@@ -45,8 +44,8 @@ const EventList = () => {
           </div>
         </div>
       </div>
-      {/* Upcoming events Grid*/}
 
+      {/* Upcoming Events Grid */}
       {upcomingEvents.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {upcomingEvents.map((event) => (
@@ -63,6 +62,7 @@ const EventList = () => {
         </div>
       )}
 
+      {/* Past Events Section */}
       {pastEvents.length > 0 && (
         <>
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Past Events</h2>
@@ -75,6 +75,4 @@ const EventList = () => {
       )}
     </div>
   );
-};
-
-export default EventList;
+}
