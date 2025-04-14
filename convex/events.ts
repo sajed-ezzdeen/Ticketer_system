@@ -74,7 +74,7 @@ export const getEvents = query({
   handler: async (ctx) => {
     return await ctx.db
       .query("events")
-      .filter((q) => q.eq(q.field("iscancelled"), undefined))
+      .filter((q) => q.eq(q.field("iscancelled"), false))
       .collect();
   },
 });
