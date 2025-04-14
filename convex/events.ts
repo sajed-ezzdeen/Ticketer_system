@@ -69,15 +69,27 @@ export const createEvent = mutation({
   },
 });
 
+// export const getEvents = query({
+//   args: {},
+//   handler: async (ctx) => {
+//     return await ctx.db
+//       .query("events")
+//       .filter((q) => q.eq(q.field("iscancelled"), undefined))
+//       .collect();
+//   },
+// });
+
+
 export const getEvents = query({
   args: {},
   handler: async (ctx) => {
     return await ctx.db
       .query("events")
-      .filter((q) => q.eq(q.field("iscancelled"), false))
+      .filter((q) => q.not(q.eq(q.field("iscancelled"), true)))
       .collect();
   },
-});
+})
+
 export const getById = query({
   args: { eventId: v.id("events") },
   handler: async (ctx, { eventId }) => {
