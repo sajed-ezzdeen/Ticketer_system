@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 import EventCard from "@/components/EventCard";
 import { Search as SearchIcon } from "lucide-react";
 import Spinner from "@/components/Spinner";
-import { Suspense } from "react";
 
 const Search = () => {
   const searchParams = useSearchParams();
@@ -30,7 +29,7 @@ const Search = () => {
     .sort((a, b) => b.eventDate - a.eventDate);
 
   return (
-  <Suspense>
+  
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Search Results Header */}
@@ -88,8 +87,12 @@ const Search = () => {
         )}
       </div>
     </div>
-  </Suspense>
+   
   );
 };
 
 export default Search;
+
+ 
+
+ 
