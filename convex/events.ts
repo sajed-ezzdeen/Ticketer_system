@@ -88,7 +88,7 @@ export const getEvents = query({
       .filter((q) =>
         q.or(
           q.eq(q.field("iscancelled"), false),
-          q.not(q.exists(q.field("iscancelled")))
+          q.eq(q.field("iscancelled"), undefined)
         )
       )
       .collect();
