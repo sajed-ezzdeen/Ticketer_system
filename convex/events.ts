@@ -78,19 +78,19 @@ export const createEvent = mutation({
 //       .collect();
 //   },
 // }); 
-
 export const getEvents = query({
   args: {},
   handler: async (ctx) => {
-    return await ctx.db.query("events").collect();
+    console.log("Fetching all events"); // Debug print
+    const events = await ctx.db.query("events").collect();
+    console.log(events); // See what you're returning
+    return events;
   },
-});
+}); 
 
- 
- 
 
- 
- 
+
+
 export const getById = query({
   args: { eventId: v.id("events") },
   handler: async (ctx, { eventId }) => {
