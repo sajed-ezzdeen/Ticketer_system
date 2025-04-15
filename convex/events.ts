@@ -69,27 +69,16 @@ export const createEvent = mutation({
   },
 });
 
-// export const getEvents = query({
-//   args: {},
-//   handler: async (ctx) => {
-//     return await ctx.db
-//       .query("events")
-//       .filter((q) => q.eq(q.field("iscancelled"), undefined))
-//       .collect();
-//   },
-// }); 
-export const getEvents = query({
+export const get = query({
   args: {},
   handler: async (ctx) => {
-    console.log("Fetching all events"); // Debug print
-    const events = await ctx.db.query("events").collect();
-    console.log(events); // See what you're returning
-    return events;
+    return await ctx.db
+      .query("events")
+      .filter((q) => q.eq(q.field("iscancelled"), undefined))
+      .collect();
   },
 }); 
-
-
-
+ 
 
 export const getById = query({
   args: { eventId: v.id("events") },
