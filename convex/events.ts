@@ -69,7 +69,7 @@ export const createEvent = mutation({
   },
 });
 
-export const get = query({
+export const getEvents = query({
   args: {},
   handler: async (ctx) => {
     return await ctx.db
@@ -79,6 +79,7 @@ export const get = query({
   },
 }); 
  
+
 
 export const getById = query({
   args: { eventId: v.id("events") },
