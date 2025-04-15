@@ -84,10 +84,17 @@ export const getEvents = query({
   handler: async (ctx) => {
     return await ctx.db
       .query("events")
-      .filter((q) => q.lt(q.field("iscancelled"), null))
+      .filter((q) =>
+        q.or(
+          q.eq(q.field("iscancelled"), false),
+          q.not(q.field("iscancelled"))
+        )
+      )
       .collect();
   },
 });
+
+ 
  
 export const getById = query({
   args: { eventId: v.id("events") },
