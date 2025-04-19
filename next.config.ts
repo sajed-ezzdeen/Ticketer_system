@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
         hostname: "useful-perch-663.convex.cloud",
         protocol: "https",
       },
+      {
+        hostname: "befitting-caribou-927.convex.cloud", 
+        protocol: "https",
+      }
     ],
   },
 };
