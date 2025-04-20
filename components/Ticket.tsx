@@ -32,7 +32,7 @@ const Ticket = ({ ticketId }: { ticketId: Id<"tickets"> }) => {
         {imageUrl && (
           <div className="relative w-full aspect-[21/9] ">
             <Image
-              src={imageUrl}
+              src={`/api/image-proxy?url=${encodeURIComponent(imageUrl)}`}
               alt={ticket.event.name}
               fill
               className={`object-cover object-center ${ticket.event.iscancelled ? "opacity-50" : ""}`}

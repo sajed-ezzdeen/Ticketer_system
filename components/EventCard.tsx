@@ -163,7 +163,7 @@ const EventCard = ({ eventId }: { eventId: Id<"events"> }) => {
       {imageUrl && (
         <div className="relative w-full h-48">
           <Image
-            src={imageUrl}
+            src={`/api/image-proxy?url=${encodeURIComponent(imageUrl)}`}
             alt={event.name}
             fill
             className="object-cover"
