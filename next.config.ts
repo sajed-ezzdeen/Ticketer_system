@@ -11,7 +11,8 @@ const nextConfig: NextConfig = {
       },
       {
         hostname: "befitting-caribou-927.convex.cloud", 
-        protocol: "https",
+        protocol: "https", 
+        pathname: "/api/storage/**",
       }
     ],
   },

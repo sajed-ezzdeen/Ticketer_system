@@ -9,7 +9,8 @@ import { CalendarDays, Ticket } from "lucide-react";
 export default function EventList() {
   const events = useQuery(api.events.getEvents);
 
-  if (!events) {
+  if (!events) { 
+    console.log("Loading events...",events);
     return (
       <div className="min-h-[400px] flex items-center justify-center">
         <Spinner />
