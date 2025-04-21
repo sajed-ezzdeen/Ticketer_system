@@ -32,7 +32,7 @@ const SellerEventCard = ({
           {imageUrl && (
             <div className="relative w-40 h-40 rounded-lg overflow-hidden shrink-0">
               <Image
-                src={`/api/image-proxy?url=${encodeURIComponent(imageUrl)}`}
+                src={imageUrl}
                 alt={event.name}
                 fill
                 className="object-cover"

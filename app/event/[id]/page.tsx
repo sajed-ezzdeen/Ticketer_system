@@ -38,7 +38,7 @@ const EventPage = () => {
           {imageUrl && (
             <div className="aspect-[21/9] relative w-full">
               <Image
-                src={`/api/image-proxy?url=${encodeURIComponent(imageUrl)}`}
+                src={imageUrl}
                 alt={event.name}
                 fill
                 className="object-cover"

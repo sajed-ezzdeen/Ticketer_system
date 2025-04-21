@@ -77,7 +77,7 @@ export const getEvents = query({
       .filter((q) => q.eq(q.field("iscancelled"), undefined))
       .collect();
   },
-}); 
+});
  
 
 
