@@ -3,7 +3,6 @@
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
-import { ConvexError } from "convex/values";
 import { toast } from "sonner";
 import Spinner from "./Spinner";
 import { WAITING_LIST_STATUS } from "@/convex/constant";
@@ -38,7 +37,19 @@ const JoinQueue = ({
         console.log("Successfully joined waiting list");
         toast.success(result.message, { duration: 5000 });
       }
-    } catch (error) {
+    } catch (error: unknown) {
+      const message = (error as Error)?.message || "";
+      
+      if (message.includes("joined the waiting list too many times")) {
+        const errorData = (error as { data?: string })?.data || "";
+        toast.error(`Slow down there! ${errorData}`, { duration: 5000 });
+      } else {
+        console.error("Error joining waiting list:", error);
+        toast.error("Uh oh! Something went wrong. Failed to join queue. Please try again later.");
+      }
+    }
+  } 
+  /*catch (error) {
       if (
         error instanceof ConvexError &&
         error.message.includes("joined the waiting list too many times")
@@ -46,10 +57,11 @@ const JoinQueue = ({
         toast.error(`Slow down there! ${error.data}`, { duration: 5000 });
       } else {
         console.error("Error joining waiting list:", error);
-        toast.error("Uh oh! Something wents wrong. Failed to join queue. Please try again later.");
+        toast.error("Uh oh! Something went wrong. Failed to join queue. Please try again later.");
       }
     }
-  };
+  }; */
+    
 
   if (queuePosition === undefined || availability === undefined || !event) {
     return <Spinner />;
