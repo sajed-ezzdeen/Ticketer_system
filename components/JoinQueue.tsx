@@ -43,10 +43,10 @@ const JoinQueue = ({
         error instanceof ConvexError &&
         error.message.includes("joined the waiting list too many times")
       ) {
-        toast.error(`Slow down there! ${error.data}`, { duration: 3000 });
+        toast.error(`Slow down there! ${error.data}`, { duration: 5000 });
       } else {
         console.error("Error joining waiting list:", error);
-        toast.error("Uh oh! Something went wrong. Failed to join queue. Please try again later.");
+        toast.error("Uh oh! Something wents wrong. Failed to join queue. Please try again later.");
       }
     }
   };
