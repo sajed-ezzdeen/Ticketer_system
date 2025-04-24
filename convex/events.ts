@@ -186,16 +186,13 @@ export const joinWaitingList = mutation({
   handler: async (ctx, { eventId, userId }) => {
     // Rate limit check
     const status = await rateLimiter.limit(ctx, "queueJoin", { key: userId });
-    // if (!status.ok) { 
-    //   console.log("Rate limit exceeded", status);
-    //   throw new ConvexError(
-    //     `You've joined the waiting list too many times. Please wait ${Math.ceil(
-    //       status.retryAfter / (60 * 1000)
-    //     )} minutes before trying again.`
-    //   );
-    // }
-    if (!status.ok) {
-      throw new ConvexError(`RATE_LIMIT_EXCEEDED:${Math.ceil(status.retryAfter / (60 * 1000))}`);
+    if (!status.ok) { 
+      console.log("Rate limit exceeded", status);
+      throw new ConvexError(
+        `You've joined the waiting list too many times. Please wait ${Math.ceil(
+          status.retryAfter / (60 * 1000)
+        )} minutes before trying again.`
+      );
     }
 
     // first check if user already has an active entry in waiting list for this event

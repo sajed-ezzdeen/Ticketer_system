@@ -3,6 +3,7 @@
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
+import { ConvexError } from "convex/values";
 import { toast } from "sonner";
 import Spinner from "./Spinner";
 import { WAITING_LIST_STATUS } from "@/convex/constant";
@@ -37,61 +38,18 @@ const JoinQueue = ({
         console.log("Successfully joined waiting list");
         toast.success(result.message, { duration: 5000 });
       }
-    } catch (error: unknown) {
-      const message = (error as Error)?.message || "";
-
-      if (message.startsWith("RATE_LIMIT_EXCEEDED")) {
-        const [, minutes] = message.split(":");
-        toast.error(
-          `Slow down there! You've joined the waiting list too many times. Please wait ${minutes} minutes.`,
-          {
-            duration: 5000,
-          }
-        );
-      } else if (message.includes("Already in waiting list")) {
-        toast.error("You're already in the waiting list for this event.", {
-          duration: 5000,
-        });
-      } else {
-        console.error("Error joining waiting list:", error);
-        toast.error(
-          "Uh oh! Something went wrong. Failed to join queue. Please try again later."
-        );
-      }
-    }
-  };
-
-  // const handleJoinQueue = async () => {
-  //   try {
-  //     const result = await joinWaitingList({ eventId, userId });
-  //     if (result.success) {
-  //       console.log("Successfully joined waiting list");
-  //       toast.success(result.message, { duration: 5000 });
-  //     }
-  //   } catch (error: unknown) {
-  //     const message = (error as Error)?.message || "";
-
-  //     if (message.includes("joined the waiting list too many times")) {
-  //       const errorData = (error as { data?: string })?.data || "";
-  //       toast.error(`Slow down there! ${errorData}`, { duration: 5000 });
-  //     } else {
-  //       console.error("Error joining waiting list:", error);
-  //       toast.error("Uh oh! Something went wrong. Failed to join queue. Please try again later.");
-  //     }
-  //   }
-  // }
-  /*catch (error) {
+    } catch (error) {
       if (
         error instanceof ConvexError &&
         error.message.includes("joined the waiting list too many times")
       ) {
-        toast.error(`Slow down there! ${error.data}`, { duration: 5000 });
+        toast.error(`Slow down there! ${error.data}`, { duration: 3000 });
       } else {
         console.error("Error joining waiting list:", error);
         toast.error("Uh oh! Something went wrong. Failed to join queue. Please try again later.");
       }
     }
-  }; */
+  };
 
   if (queuePosition === undefined || availability === undefined || !event) {
     return <Spinner />;
