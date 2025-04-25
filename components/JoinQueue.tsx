@@ -46,7 +46,7 @@ const JoinQueue = ({
         toast.error(`Slow down there! ${error.data}`, { duration: 3000 });
       } else {
         console.error("Error joining waiting list:", error);
-        toast.error("Uh oh! Something went wrong. Failed to join queue. Please try again later. Wait more than 16 minutes and then try again.");
+        toast.error("Uh oh! Something went wrong. Failed to join queue. Please try again later. Wait more than 16 minutes.");
       }
     }
   };
